@@ -62,12 +62,13 @@ public class MecanumDriveCDT2021 extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         // Initialize the hardware variables
-        fLeft  = hardwareMap.get(DcMotor.class, "fLeft");
-        fRight = hardwareMap.get(DcMotor.class, "fRight");
-        bLeft  = hardwareMap.get(DcMotor.class, "bLeft");
-        bRight = hardwareMap.get(DcMotor.class, "bRight");
+        fLeft  = hardwareMap.get(DcMotor.class, "frontLeft");
+        fRight = hardwareMap.get(DcMotor.class, "frontRight");
+        bLeft  = hardwareMap.get(DcMotor.class, "backLeft");
+        bRight = hardwareMap.get(DcMotor.class, "backRight");
 
-        fRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        bLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        bRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         fLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         fRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -90,15 +91,6 @@ public class MecanumDriveCDT2021 extends LinearOpMode {
                 while(runtime.milliseconds() - currentMillis < 750){}
             }
 
-//            if(gamepad1.b) {
-//                collectionMotor.setPower(gamepad1.left_trigger);
-//            } else if(gamepad1.a) {
-//                collectionMotor.setPower(-0.8);
-//            } else {
-//                collectionMotor.setPower(0);
-//            }
-
-
             // Show the elapsed game time.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.update();
@@ -117,7 +109,7 @@ public class MecanumDriveCDT2021 extends LinearOpMode {
         fLeft.setPower(wheelSpeeds[0]);
         fRight.setPower(wheelSpeeds[1]);
         bLeft.setPower(wheelSpeeds[2]);
-        bRight.setPower(-wheelSpeeds[3]);
+        bRight.setPower(wheelSpeeds[3]);
     }
 
     private void normalize(double[] wheelSpeeds) {
